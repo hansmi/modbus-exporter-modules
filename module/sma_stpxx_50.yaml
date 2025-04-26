@@ -1,0 +1,1215 @@
+# Parameters from firmware version 03.10.09.R.
+
+modules:
+- name: sma_stpxx_50
+  protocol: tcp/ip
+  metrics:
+  - name: sma_stpxx_50_measurement_coolsys_cab_tmpval
+    help: |
+      Internal temperature.
+
+      Group: Device
+      Channel: Measurement.Coolsys.Cab.TmpVal[0]
+    labels:
+      string: "0"
+    address: 430953
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.1
+  - name: sma_stpxx_50_measurement_dcms_amp
+    help: |
+      DC current input.
+
+      Group: DC Side
+      Channel: Measurement.DcMs.Amp[0]
+      Unit: A
+      Default: 0
+      Range: -150 to 150
+    labels:
+      string: "0"
+    address: 430769
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_dcms_amp
+    labels:
+      string: "1"
+    address: 430957
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_dcms_amp
+    labels:
+      string: "2"
+    address: 430963
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_dcms_totdcencntwh
+    help: |
+      Energy released by string.
+
+      Group: DC Side
+      Channel: Measurement.DcMs.TotDcEnCntWh[0]
+      Unit: Wh
+    labels:
+      string: "0"
+    address: 432209
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_dcms_totdcencntwh
+    labels:
+      string: "1"
+    address: 432213
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_dcms_totdcencntwh
+    labels:
+      string: "2"
+    address: 432217
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_dcms_vol
+    help: |
+      DC voltage input.
+
+      Group: DC Side
+      Channel: Measurement.DcMs.Vol[0]
+      Unit: V
+      Default: 0
+      Range: 0 to 1500
+    labels:
+      string: "0"
+    address: 430771
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_dcms_vol
+    labels:
+      string: "1"
+    address: 430959
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_dcms_vol
+    labels:
+      string: "2"
+    address: 430965
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_dcms_watt
+    help: |
+      DC power input.
+
+      Group: DC Side
+      Channel: Measurement.DcMs.Watt[0]
+      Unit: W
+      Default: 0
+      Range: 0 to 100000
+    labels:
+      string: "0"
+    address: 430773
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_dcms_watt
+    labels:
+      string: "1"
+    address: 430961
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_dcms_watt
+    labels:
+      string: "2"
+    address: 430967
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_a_phs
+    help: |
+      Grid current phase L1.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.A.phsA
+      Unit: A
+      Default: 0
+      Range: 0 to 100
+    labels:
+      phase: "1"
+    address: 430977
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_a_phs
+    labels:
+      phase: "2"
+    address: 430979
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_a_phs
+    labels:
+      phase: "3"
+    address: 430981
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_grityp
+    help: |
+      Grid type.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.GriTyp
+      Default: 18007
+      Value 18007: 400 V/230 V, three line conductors and neutral conductor
+      Value 18011: 230 V/400 V, three line conductors and neutral conductor
+      Value 18012: 380 V/220 V, three line conductors and neutral conductor
+      Value 18023: 440 V/254 V, three line conductors and neutral conductor
+      Value 18030: 420 V/242 V, three line conductors and neutral conductor
+    address: 430237
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_hz
+    help: |
+      Grid frequency.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.Hz
+      Unit: Hz
+      Default: 0
+      Range: 0 to 70
+    address: 430803
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_gridms_phv_phs
+    help: |
+      Grid voltage phase L1.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.PhV.phsA
+      Unit: V
+      Default: 0
+      Range: 0 to 500
+    labels:
+      phase: "1"
+    address: 430783
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_gridms_phv_phs
+    labels:
+      phase: "2"
+    address: 430785
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_gridms_phv_phs
+    labels:
+      phase: "3"
+    address: 430787
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_gridms_tota
+    help: |
+      Grid current.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotA
+      Unit: A
+      Default: 0
+      Range: 0 to 200
+    address: 430795
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_totpfeei
+    help: |
+      EEI displacement power factor.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotPFEEI
+      Default: 1
+      Range: -1 to 1
+    address: 431221
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_totpfext
+    help: |
+      Excitation type of cos φ.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotPFExt
+      Default: 1041
+      Value 1041: Overexcited
+      Value 1042: Underexcited
+    address: 430823
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_totpfprc
+    help: |
+      Displacement power factor.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotPFPrc
+      Default: 1
+      Range: 0 to 1
+    address: 430949
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_gridms_totva
+    help: |
+      Apparent power.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotVA
+      Unit: VA
+      Default: 0
+      Range: 0 to 50000
+    address: 430813
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_totvar
+    help: |
+      Reactive power.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotVAr
+      Unit: var
+      Default: 0
+      Range: 0 to 50000
+    address: 430805
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_totw
+    help: |
+      Power.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.TotW
+      Unit: W
+      Default: 0
+      Range: 0 to 50000
+    address: 430775
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_va_phs
+    help: |
+      Apparent power L1.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.VA.phsA
+      Unit: VA
+      Default: 0
+      Range: 0 to 23000
+    labels:
+      phase: "1"
+    address: 430815
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_va_phs
+    labels:
+      phase: "2"
+    address: 430817
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_va_phs
+    labels:
+      phase: "3"
+    address: 430819
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_var_phs
+    help: |
+      Reactive power L1.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.VAr.phsA
+      Unit: var
+      Default: 0
+      Range: 0 to 23000
+    labels:
+      phase: "1"
+    address: 430807
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_var_phs
+    labels:
+      phase: "2"
+    address: 430809
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_var_phs
+    labels:
+      phase: "3"
+    address: 430811
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_w_phs
+    help: |
+      Power L1.
+
+      Group: AC Side
+      Channel: Measurement.GridMs.W.phsA
+      Unit: W
+      Default: 0
+      Range: 0 to 23000
+    labels:
+      phase: "1"
+    address: 430777
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_w_phs
+    labels:
+      phase: "2"
+    address: 430779
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_gridms_w_phs
+    labels:
+      phase: "3"
+    address: 430781
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_inverter_curwctldrknom
+    help: |
+      PV power limitation via communication for direct marketing.
+
+      Group: System and device control
+      Channel: Measurement.Inverter.CurWCtlDrkNom
+      Unit: %
+    address: 431241
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_inverter_curwctlnom
+    help: |
+      Internal PV power limitation.
+
+      Group: System and device control
+      Channel: Measurement.Inverter.CurWCtlNom
+      Unit: %
+    address: 431245
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_inverter_dclvol
+    help: |
+      Intermediate circuit voltage.
+
+      Group: Device
+      Channel: Measurement.Inverter.DclVol
+      Unit: V
+      Default: 0
+      Range: 0 to 1500
+    address: 430975
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_inverter_varmodcfg_pfctlvolcfg_stt
+    help: |
+      cos φ(V), status.
+
+      Group: System and device control
+      Channel: Measurement.Inverter.VArModCfg.PFCtlVolCfg.Stt
+      Default: 303
+      Value 303: Off
+      Value 802: Active
+      Value 1295: Standby
+    address: 433009
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_inverter_waval
+    help: |
+      Available inverter power.
+
+      Group: Device
+      Channel: Measurement.Inverter.WAval
+      Unit: W
+    address: 431547
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_isolation_flta
+    help: |
+      Residual current.
+
+      Group: DC Side
+      Channel: Measurement.Isolation.FltA
+      Unit: A
+      Default: 0
+      Range: 0 to 1000
+    address: 431247
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_isolation_leakris
+    help: |
+      Insulation resistance.
+
+      Group: DC Side
+      Channel: Measurement.Isolation.LeakRis
+      Unit: Ohm
+    address: 430225
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plnta_phs
+    help: |
+      Output current Grid feed-in Line conductor L1 at point of interconnection.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntA.phsA
+      Unit: A
+    labels:
+      phase: "1"
+    address: 431535
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_metering_pccms_plnta_phs
+    labels:
+      phase: "2"
+    address: 431537
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_metering_pccms_plnta_phs
+    labels:
+      phase: "3"
+    address: 431539
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_measurement_metering_pccms_plntcsmpw
+    help: |
+      System active power (drawn) at grid connection point.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntCsmpW
+      Unit: W
+    address: 435415
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntcsmpwh
+    help: |
+      Energy drawn at the grid connection point.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntCsmpWh
+      Unit: Wh
+    address: 435417
+    dataType: uint64
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntpf
+    help: |
+      Displacement power factor at point of interconnection.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntPF
+    address: 431525
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_metering_pccms_plntphv_phs
+    help: |
+      PV system voltage phase L1.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntPhV.phsA
+      Unit: V
+    labels:
+      phase: "1"
+    address: 431529
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_metering_pccms_plntphv_phs
+    labels:
+      phase: "2"
+    address: 431531
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_metering_pccms_plntphv_phs
+    labels:
+      phase: "3"
+    address: 431533
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_metering_pccms_plntvar
+    help: |
+      System reactive power at grid connection point.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntVAr
+      Unit: var
+    address: 431251
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntvar_phs
+    help: |
+      Reactive power Grid feed-in Line conductor L1 at point of interconnection.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntVAr.phsA
+      Unit: var
+    labels:
+      phase: "1"
+    address: 431509
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntvar_phs
+    labels:
+      phase: "2"
+    address: 431511
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntvar_phs
+    labels:
+      phase: "3"
+    address: 431513
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntw
+    help: |
+      System active power at grid connection point.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntW
+      Unit: W
+    address: 431249
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntw_phs
+    help: |
+      Power Grid feed-in Line conductor L1 at point of interconnection.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntW.phsA
+      Unit: W
+    labels:
+      phase: "1"
+    address: 431503
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntw_phs
+    labels:
+      phase: "2"
+    address: 431505
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntw_phs
+    labels:
+      phase: "3"
+    address: 431507
+    dataType: int32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_metering_pccms_plntwh
+    help: |
+      Feed-in energy at the grid connection point.
+
+      Group: Grid connection
+      Channel: Measurement.Metering.PCCMs.PlntWh
+      Unit: Wh
+    address: 435421
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_metering_totfeedtms
+    help: |
+      Feed-in time.
+
+      Group: AC Side
+      Channel: Measurement.Metering.TotFeedTms
+      Unit: s
+    address: 430525
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_metering_totoptms
+    help: |
+      Operating time.
+
+      Group: AC Side
+      Channel: Measurement.Metering.TotOpTms
+      Unit: s
+    address: 430521
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_metering_totwhout
+    help: |
+      Total yield.
+
+      Group: AC Side
+      Channel: Measurement.Metering.TotWhOut
+      Unit: Wh
+    address: 430513
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_operation_bckstt
+    help: |
+      Backup mode status.
+
+      Group: Device
+      Channel: Measurement.Operation.BckStt
+      Default: 1440
+      Value 1440: Grid mode
+    address: 430235
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_curavailplnt
+    help: |
+      Generation plant availability.
+
+      Group: System and device control
+      Channel: Measurement.Operation.CurAvailPlnt
+      Unit: %
+    address: 432193
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_curavailvarovext
+    help: |
+      Available overexcited reactive power.
+
+      Group: AC Side
+      Channel: Measurement.Operation.CurAvailVArOvExt
+      Unit: var
+    address: 432189
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_curavailvarovextnom
+    help: |
+      Available overexcited reactive power.
+
+      Group: AC Side
+      Channel: Measurement.Operation.CurAvailVArOvExtNom
+      Unit: %
+    address: 432199
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_operation_curavailvarunext
+    help: |
+      Available underexcited reactive power.
+
+      Group: AC Side
+      Channel: Measurement.Operation.CurAvailVArUnExt
+      Unit: var
+    address: 432187
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_curavailvarunextnom
+    help: |
+      Available underexcited reactive power.
+
+      Group: AC Side
+      Channel: Measurement.Operation.CurAvailVArUnExtNom
+      Unit: %
+    address: 432197
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_measurement_operation_dmd_wctl
+    help: |
+      Current spec. active power limitation P.
+
+      Group: System and device control
+      Channel: Measurement.Operation.Dmd.WCtl
+      Unit: W
+    address: 431405
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_drtstt
+    help: |
+      Reason for derating.
+
+      Group: Status
+      Channel: Measurement.Operation.DrtStt
+      Default: 302
+      Value 302: -------
+      Value 557: Overtemperature
+      Value 884: not active
+      Value 1705: Frequency deviation
+      Value 1706: Derating due to PV current
+      Value 3520: Voltage deviation
+      Value 3554: Reactive power priority
+      Value 3556: High DC voltage
+      Value 4560: External setting
+      Value 4561: External setting 2
+    address: 430219
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_evt_dsc
+    help: |
+      Fault correction measure.
+
+      Group: Status
+      Channel: Measurement.Operation.Evt.Dsc
+      Default: 973
+      Value 973: ------
+    address: 430215
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_evt_msg
+    help: |
+      Message.
+
+      Group: Status
+      Channel: Measurement.Operation.Evt.Msg
+      Default: 973
+      Value 973: ------
+    address: 430213
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_evtcntistl
+    help: |
+      Number of events for installer.
+
+      Group: Status
+      Channel: Measurement.Operation.EvtCntIstl
+    address: 435381
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_operation_evtcntsvc
+    help: |
+      Number of events for service.
+
+      Group: Status
+      Channel: Measurement.Operation.EvtCntSvc
+    address: 435385
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_operation_evtcntusr
+    help: |
+      Number of events for user.
+
+      Group: Status
+      Channel: Measurement.Operation.EvtCntUsr
+    address: 435377
+    dataType: uint64
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_operation_griswcnt
+    help: |
+      Number of grid connections.
+
+      Group: AC Side
+      Channel: Measurement.Operation.GriSwCnt
+      Default: 0
+    address: 430599
+    dataType: uint32
+    endianness: big
+    metricType: counter
+  - name: sma_stpxx_50_measurement_operation_griswstt
+    help: |
+      Grid relay/contactor.
+
+      Group: Status
+      Channel: Measurement.Operation.GriSwStt
+      Default: 311
+      Value 51: Closed
+      Value 311: Open
+    address: 430217
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_health
+    help: |
+      Condition.
+
+      Group: Status
+      Channel: Measurement.Operation.Health
+      Default: 307
+      Value 35: Fault
+      Value 303: Off
+      Value 307: Ok
+      Value 455: Warning
+    address: 430201
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_healthstt_alm
+    help: |
+      Nominal power in Fault Mode.
+
+      Group: Status
+      Channel: Measurement.Operation.HealthStt.Alm
+      Unit: W
+    address: 430207
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_healthstt_ok
+    help: |
+      Nominal power in Ok Mode.
+
+      Group: Status
+      Channel: Measurement.Operation.HealthStt.Ok
+      Unit: W
+    address: 430203
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_healthstt_wrn
+    help: |
+      Nominal power in Warning Mode.
+
+      Group: Status
+      Channel: Measurement.Operation.HealthStt.Wrn
+      Unit: W
+    address: 430205
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_nbrqodstt
+    help: |
+      Number of inverters in state Q on Demand.
+
+      Group: Status
+      Channel: Measurement.Operation.NbrQodStt
+    address: 435413
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_nbrrunstt
+    help: |
+      Number of inverters in state Run.
+
+      Group: Status
+      Channel: Measurement.Operation.NbrRunStt
+    address: 435407
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_nbrstopstt
+    help: |
+      Number of inverters in state Stop.
+
+      Group: Status
+      Channel: Measurement.Operation.NbrStopStt
+    address: 435411
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_nbrwaitstt
+    help: |
+      Number of inverters in state Wait.
+
+      Group: Status
+      Channel: Measurement.Operation.NbrWaitStt
+    address: 435409
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_opstt
+    help: |
+      General operating status.
+
+      Group: Status
+      Channel: Measurement.Operation.OpStt
+      Default: 569
+      Value 303: Off
+      Value 569: Activated
+      Value 1295: Standby
+      Value 1795: Bolted
+      Value 16777213: Information not available
+    address: 440029
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_pvgriconn
+    help: |
+      Plant mains connection.
+
+      Group: AC Side
+      Channel: Measurement.Operation.PvGriConn
+      Default: 1779
+      Value 1779: Separated
+      Value 1780: Public electricity mains
+    address: 430881
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_rstrlokstt
+    help: |
+      Block status.
+
+      Group: Status
+      Channel: Measurement.Operation.RstrLokStt
+      Default: 302
+      Value 257: Frequency not permitted
+      Value 302: -------
+      Value 1655: Electric arc detected
+      Value 1690: Fast shut-down
+      Value 2386: Overvoltage
+      Value 2387: Undervoltage
+      Value 2390: Passive islanding detection
+      Value 3167: Active islanding detection
+      Value 4553: After fault current
+      Value 4570: Wait for enable operation
+      Value 5470: After reverse polarity detection battery
+      Value 16777213: Information not available
+    address: 430251
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_runstt
+    help: |
+      Operating status.
+
+      Group: Status
+      Channel: Measurement.Operation.RunStt
+      Default: 16777213
+      Value 295: MPP
+      Value 443: Constant voltage
+      Value 1855: Stand-alone operation
+      Value 2119: Derating
+      Value 5477: Q on Demand
+      Value 16777213: Information not available
+    address: 433003
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_standbystt
+    help: |
+      Standby status.
+
+      Group: Status
+      Channel: Measurement.Operation.StandbyStt
+      Default: 4570
+      Value 1393: Waiting for PV voltage
+      Value 1394: Waiting for valid AC grid
+      Value 4570: Wait for enable operation
+      Value 16777213: Information not available
+    address: 433001
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_varctl_varmodact
+    help: |
+      Active reactive power range.
+
+      Group: System and device control
+      Channel: Measurement.Operation.VArCtl.VArModAct
+      Default: 4398
+      Value 4396: Reactive power mode in case of active power output
+      Value 4397: Reactive power mode in case of active power draw
+      Value 4398: Reactive power mode in case of zero power output
+    address: 433007
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_measurement_operation_varmaxlimnom
+    help: |
+      Maximum reactive power setpoint specification.
+
+      Group: System and device control
+      Channel: Measurement.Operation.VArMaxLimNom
+      Unit: %
+    address: 434695
+    dataType: int32
+    endianness: big
+    metricType: gauge
+    factor: 0.01
+  - name: sma_stpxx_50_modbus_data_change_count
+    help: |
+      Modbus data change count.
+
+      Group: Type Label
+      Channel: Modbus data change count
+    address: 430007
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_artg
+    help: |
+      Nominal current of all phases.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.ARtg
+      Unit: A
+      Default: 100
+      Range: 0 to 100
+    address: 440480
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+    factor: 0.001
+  - name: sma_stpxx_50_parameter_nameplate_cmpmain_swrev
+    help: |
+      Firmware version of the main processor.
+
+      Group: Device Components
+      Channel: Parameter.Nameplate.CmpMain.SwRev
+    address: 440063
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_mainmodel
+    help: |
+      Device class.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.MainModel
+      Default: 8001
+      Value 8001: Solar Inverters
+    address: 430051
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_model
+    help: |
+      Device type.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.Model
+      Default: 9491
+      Value 9488: Sunny Tripower X 25
+      Value 9489: Sunny Tripower X 20
+      Value 9491: Sunny Tripower X 15
+      Value 9492: Sunny Tripower X 12
+    address: 430053
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_pkgrev
+    help: |
+      Firmware version.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.PkgRev
+    address: 430059
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_sernum
+    help: |
+      Serial number.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.SerNum
+    address: 430005
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_susyid
+    help: |
+      SUSyID.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.SusyId
+      Default: 427
+    address: 430003
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_parameter_nameplate_vendor
+    help: |
+      Manufacturer.
+
+      Group: Type Label
+      Channel: Parameter.Nameplate.Vendor
+      Default: 461
+      Value 461: SMA
+    address: 430055
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_sma_modbus_profile_revision
+    help: |
+      SMA Modbus profile revision.
+
+      Group: Type Label
+      Channel: SMA Modbus profile revision
+    address: 430001
+    dataType: uint32
+    endianness: big
+    metricType: gauge
+  - name: sma_stpxx_50_utc_system_time
+    help: |
+      UTC system time.
+
+      Group: Type Label
+      Channel: UTC system time
+      Unit: s
+    address: 430193
+    dataType: uint32
+    endianness: big
+    metricType: gauge

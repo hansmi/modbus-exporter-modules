@@ -1,0 +1,306 @@
+#!/usr/bin/env python3
+
+"""Convert SMA EnnexOS Modbus parameter descriptions to JSON.
+
+The code is written in Python to make use of the pandas library, in particular
+its functionality for extracting data from HTML tables.
+"""
+
+import argparse
+import contextlib
+import dataclasses
+import enum
+import fnmatch
+import json
+import pandas
+import re
+import sys
+import zipfile
+
+
+NUMBER_RE = r"[-+]?\d+(?:\.\d+)?"
+UNIT_RE = r"(?:[%a-z]+[./\w]*)"
+
+FIXED_VALUE_RANGE_UNIT_RE = re.compile("".join((
+    r"(?i)^\s*(?P<lower>",
+    NUMBER_RE,
+    r")\s+\.\.\s+(?P<upper>",
+    NUMBER_RE,
+    r")(?:\s*(?P<unit>",
+    UNIT_RE,
+    r"))?\s*$",
+)))
+
+FIXED_VALUE_UNIT_RE = re.compile("".join((
+    r"(?i)^\s*(?P<value>",
+    NUMBER_RE,
+    r")(?:\s+(?P<unit>",
+    UNIT_RE,
+    r"))?\s*$",
+)))
+
+FIXED_UNIT_RE = re.compile("".join((
+    r"(?i)^\s*(?P<unit>",
+    UNIT_RE,
+    r")\s*$",
+)))
+
+TAGLIST_VALUE_DESC_RE = re.compile(r"(?i)^\s*(?P<value>\d+)\s*:\s*(?P<desc>.*)\s*$")
+
+
+def normalize_space(text):
+    return " ".join(text.split())
+
+
+@contextlib.contextmanager
+def find_parameter_file(archive, pattern):
+    parameter_file_pattern = re.compile(fnmatch.translate(pattern), flags=re.IGNORECASE)
+
+    with zipfile.ZipFile(archive) as archive_handle:
+        for info in archive_handle.infolist():
+            if m := parameter_file_pattern.fullmatch(info.filename):
+                yield archive_handle.open(info)
+                return
+
+    raise ValueError(f"Archive {archive!r} contains no file matching {pattern!r}")
+
+
+@enum.unique
+class ParameterDataType(enum.StrEnum):
+    S16 = enum.auto()
+    S32 = enum.auto()
+    S64 = enum.auto()
+    U16 = enum.auto()
+    U32 = enum.auto()
+    U64 = enum.auto()
+    TEXT = enum.auto()
+
+
+@dataclasses.dataclass(kw_only=True, slots=True)
+class ParameterFormatFixed:
+    # Shift the decimal separator. Positive for shifting to the left (e.g. m³
+    # to liters).
+    decimal_shift: int
+    lower_bound: int | None = None
+    upper_bound: int | None = None
+    default: int | None = None
+    unit: str | None = None
+
+
+@dataclasses.dataclass(kw_only=True, slots=True)
+class ParameterFormatTaglist:
+    default: int | None = None
+    values: dict[int, str] = dataclasses.field(default_factory=dict)
+
+
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
+class ParameterFormat:
+    fixed: ParameterFormatFixed | None = None
+    taglist: ParameterFormatTaglist | None = None
+    unknown: str | None = None
+
+    def asdict(self):
+        result = dataclasses.asdict(self)
+        result = {k: v for k, v in result.items() if v}
+        assert len(result) == 1
+        return result
+
+
+def extract_format_fixed(shift, *, value_range, value_default, unit):
+    result = ParameterFormatFixed(decimal_shift=shift, unit=unit)
+    factor = 10 ** shift
+
+    if m := FIXED_VALUE_RANGE_UNIT_RE.fullmatch(value_range):
+        result.lower_bound = int(factor * float(m.group("lower")))
+        result.upper_bound = int(factor * float(m.group("upper")))
+        if result.unit is None and m.group("unit"):
+            result.unit = m.group(3)
+
+    elif result.unit is None and (m := FIXED_UNIT_RE.fullmatch(value_range)):
+        result.unit = m.group("unit")
+
+    if m := FIXED_VALUE_UNIT_RE.fullmatch(value_default):
+        result.default = int(factor * float(m.group(1)))
+        if result.unit is None and m.group(2):
+            result.unit = m.group(2)
+
+    return result
+
+
+def parse_taglist_line(line):
+    if line == "-":
+        return None, None
+
+    if m := TAGLIST_VALUE_DESC_RE.fullmatch(line):
+        if not (desc := normalize_space(m.group("desc"))):
+            desc = None
+
+        return int(m.group("value")), desc
+
+    try:
+        return int(line, base=10), None
+    except ValueError:
+        pass
+
+    raise Exception(f"Unknown line format: {line!r}")
+
+
+def extract_format_taglist(*, value_range, value_default):
+    result = ParameterFormatTaglist()
+
+    if value_default:
+        value, desc = parse_taglist_line(value_default)
+        if value is not None:
+            result.default = value
+            if desc:
+                result.values[value] = desc
+
+    for line in value_range.splitlines():
+        value, desc = parse_taglist_line(line)
+        if value is None:
+            continue
+
+        result.values[value] = desc
+
+    return result
+
+
+def extract_format(name, *, value_range, value_default):
+    name = name.lower()
+
+    fixed_shift = None
+    fixed_unit = None
+
+    match name:
+        case "raw" | "fw_version":
+            fixed_shift = 0
+        case "duration" | "date_time" | "tm_loc":
+            fixed_shift = 0
+            fixed_unit = "s"
+        case "temperature":
+            fixed_shift = 1
+        case _ if name.startswith("fix"):
+            fixed_shift = int(name[3:], base=10)
+
+    if fixed_shift is not None:
+        return ParameterFormat(fixed=extract_format_fixed(
+            fixed_shift,
+            value_range=normalize_space(value_range),
+            value_default=value_default,
+            unit=fixed_unit,
+        ))
+
+    match name:
+        case "taglist":
+            return ParameterFormat(taglist=extract_format_taglist(
+                value_range=value_range,
+                value_default=value_default,
+            ))
+
+    return ParameterFormat(unknown=name)
+
+
+@dataclasses.dataclass(kw_only=True, slots=True)
+class Parameter:
+    address: int
+    name: str
+    access_read: bool
+    access_write: bool
+    data_type: ParameterDataType
+    data_format: ParameterFormat
+    group: str
+    channel: str
+
+    def asdict(self):
+        result = dataclasses.asdict(self)
+        result["data_format"] = self.data_format.asdict()
+        return result
+
+
+def extract_parameters(table):
+    colindex = {
+        normalize_space(name).lower(): idx
+        for idx, name in enumerate(table.columns)
+    }
+
+    colindex_address = colindex["sma modbus register address"]
+    colindex_name = colindex["name"]
+    colindex_access = colindex["sma modbus access"]
+    colindex_data_type = colindex["sma modbus data type"]
+    colindex_data_format = colindex["sma modbus data format"]
+    colindex_group = colindex["group"]
+    colindex_channel = colindex["channel"]
+    colindex_value_range = colindex["value range / unit / set values"]
+    colindex_value_default = colindex["default value"]
+
+    result = []
+
+    for _, row in table.iterrows():
+        try:
+            access = normalize_space(row.iloc[colindex_access]).lower()
+
+            param = Parameter(
+                address=int(row.iloc[colindex_address]),
+                name=normalize_space(row.iloc[colindex_name]),
+                access_read="r" in access,
+                access_write="w" in access,
+                data_type=getattr(ParameterDataType, row.iloc[colindex_data_type].upper()),
+                data_format=extract_format(
+                    normalize_space(row.iloc[colindex_data_format]),
+                    value_range=row.iloc[colindex_value_range].strip(),
+                    value_default=normalize_space(row.iloc[colindex_value_default]),
+                ),
+                group=normalize_space(row.iloc[colindex_group]),
+                channel=normalize_space(row.iloc[colindex_channel]),
+            )
+        except Exception as exc:
+            exc.add_note(repr(row.to_dict()))
+            raise
+
+        result.append(param)
+
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--parameter-file-pattern", type=str,
+                        help=(
+                            "Glob pattern for matching parameter list file in "
+                            "archive. Case-insensitive. The first matching "
+                            "file is used."
+                        ),
+                        default="PARAMETER-*/parameterlist_en.html")
+    parser.add_argument("--description", type=str,
+                        help="Human-readable description to embed in the output.")
+    parser.add_argument("--output", type=argparse.FileType("w"),
+                        help="Output file.",
+                        default=sys.stdout)
+    parser.add_argument("archive", type=str,
+                        help="Path to upstream parameter documentation archive.")
+
+    args = parser.parse_args()
+
+    # Disable the conversion of newlines to spaces.
+    #
+    # https://github.com/pandas-dev/pandas/pull/45972#issuecomment-2705454212
+    pandas.io.html._remove_whitespace = lambda x: x
+
+    with find_parameter_file(args.archive, args.parameter_file_pattern) as parameter_file:
+        table = pandas.read_html(parameter_file, attrs={"id": "paraTable"})[0]
+
+    parameters = extract_parameters(table)
+    parameters.sort(key=lambda x: x.address)
+
+    json.dump(dict(
+        header=dict(
+            description=args.description,
+        ),
+        parameters=[i.asdict() for i in parameters],
+    ), args.output, indent=2, allow_nan=False, sort_keys=True)
+
+    print(file=args.output)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,4 @@
+/cache/
+/dist/
+/tools/generate-ennexos-module/generate-ennexos-module
+/tools/generate-ennexos-module/generate-ennexos-module*.tmp

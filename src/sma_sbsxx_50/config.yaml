@@ -1,0 +1,83 @@
+---
+address_include:
+  # SMA Modbus profile revision
+  - 30001
+
+  # Modbus data change count
+  - 30007
+
+  # UTC system time
+  - 30193
+
+address_exclude:
+  # Duplicate Parameter.Nameplate.SerNum
+  - 30057
+  - 40067
+
+  # Duplicate Measurement.Coolsys.Cab.TmpVal[0]
+  - 34113
+
+  # Duplicate Measurement.DcMs.Amp[*]
+  - 31793
+  - 31795
+  - 31797
+
+  # Unsigned versions of Measurement.GridMs.A.phs*
+  - 30797
+  - 30799
+  - 30801
+
+  # Duplicate of Measurement.GridMs.TotVAr
+  - 31497
+
+  # 32-bit version of Measurement.Operation.EvtCntIstl
+  - 30561
+
+  # 32-bit version of Measurement.Operation.EvtCntSvc
+  - 30563
+
+  # 32-bit version of Measurement.Operation.EvtCntUsr
+  - 30559
+
+  # Duplicate Measurement.Operation.HealthStt.Ok
+  - 31085
+
+  # 32-bit version of Measurement.Metering.TotFeedTms
+  - 30543
+
+  # 32-bit version of Measurement.Metering.TotOpTms
+  - 30541
+
+  # 32-bit version of Measurement.Metering.TotWhOut
+  - 30529
+  - 30531
+  - 30533
+
+  # 32-bit version of Measurement.Metering.DyWhOut
+  - 30535
+  - 30537
+  - 30539
+
+channel_include_regexp:
+  - '^Measurement\.Coolsys\.'
+  - '^Measurement\.DcMs\.'
+  - '^Measurement\.GridMs\.'
+  - '^Measurement\.Inverter\.'
+  - '^Measurement\.Isolation\.'
+  - '^Measurement\.Metering\.'
+  - '^Measurement\.Operation\.'
+  - '^Parameter\.Nameplate\.'
+
+channel_exclude_regexp:
+  - '^Parameter\.Nameplate\.Location$'
+  - '^Parameter\.Nameplate\.CmpBMS\.SerNumTxt$'
+  - '\.phs[ABC]2[ABC]$'
+
+channel_counter_type_regexp:
+  - '^Measurement\.DcMs\.TotDcEnCntWh$'
+  - '^Measurement\.Metering\.(?:TotFeedTms|TotOpTms|TotWhOut)$'
+  - '^Measurement\.Metering\.PCCMs\.PlntWh$'
+  - '^Measurement\.Operation\.EvtCnt\w+$'
+  - '^Measurement\.Operation\.GriSwCnt$'
+
+# vim: set sw=2 sts=2 et :
