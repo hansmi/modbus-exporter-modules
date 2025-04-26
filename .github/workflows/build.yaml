@@ -11,7 +11,8 @@ on:
       - 'v[0-9]+.*'
 
 permissions:
-  contents: read
+  contents: write
+  packages: write
 
 env:
   CONTAINER_TAGS: |-
@@ -20,8 +21,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
