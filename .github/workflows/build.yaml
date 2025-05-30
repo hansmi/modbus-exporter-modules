@@ -103,4 +103,4 @@ jobs:
             docker push "$i"
           done
 
-# vim: set sw=2 sts=2 et : -->
+# vim: set sw=2 sts=2 et :
