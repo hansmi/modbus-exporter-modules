@@ -1,0 +1,98 @@
+---
+# Parameters for R4DCB08 devices. It collects temperature values from up to
+# eight DS18B20 sensors.
+modules:
+- name: r4dcb08
+  protocol: tcp/ip
+  metrics:
+  - &r4dcb08_temperature_celsius
+    name: r4dcb08_temperature_celsius
+    address: 300
+    help: Measured temperature (degrees celsius).
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+    labels:
+      sensor: '0'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 301
+    labels:
+      sensor: '1'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 302
+    labels:
+      sensor: '2'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 303
+    labels:
+      sensor: '3'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 304
+    labels:
+      sensor: '4'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 305
+    labels:
+      sensor: '5'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 306
+    labels:
+      sensor: '6'
+
+  - <<: *r4dcb08_temperature_celsius
+    address: 307
+    labels:
+      sensor: '7'
+
+  - &r4dcb08_temperature_correction
+    name: r4dcb08_temperature_correction
+    address: 308
+    help: Temperature correction (degrees celsius).
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+    labels:
+      sensor: '0'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 309
+    labels:
+      sensor: '1'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3010
+    labels:
+      sensor: '2'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3011
+    labels:
+      sensor: '3'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3012
+    labels:
+      sensor: '4'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3013
+    labels:
+      sensor: '5'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3014
+    labels:
+      sensor: '6'
+
+  - <<: *r4dcb08_temperature_correction
+    address: 3015
+    labels:
+      sensor: '7'
+
+# vim: set sw=2 sts=2 et :

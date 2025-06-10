@@ -23,6 +23,7 @@ sma_stpxx_50
 sma_sbsxx_50
 inepro_pro380
 xymd02
+r4dcb08
 endef
 
 $(foreach i,$(sort $(MODULES)),$(eval include src/$(i)/module.mk))
