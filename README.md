@@ -4,6 +4,8 @@ Custom configuration modules for @RichiH's [Modbus Prometheus exporter
 (`RichiH/modbus_exporter`)](https://github.com/RichiH/modbus_exporter) for
 personal use.
 
+The modules are available in the [`modules` directory](./modules/).
+
 ## Notes for manual Modbus testing
 
 ```shell
