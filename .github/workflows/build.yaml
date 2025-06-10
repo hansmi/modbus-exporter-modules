@@ -81,6 +81,10 @@ jobs:
           path: dist/**
           if-no-files-found: error
 
+      - name: Check for differences
+        run: |
+          git diff --exit-code
+
       - name: GitHub Container Registry login
         if: steps.vars.outputs.release_enabled
         uses: docker/login-action@v3
