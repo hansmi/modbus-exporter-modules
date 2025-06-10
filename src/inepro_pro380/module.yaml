@@ -1,0 +1,657 @@
+---
+# Parameters for Inepro PRO380-Mod electricity meters. The same meter is also
+# sold under the name "Solar-Log PRO380-Mod".
+modules:
+- name: inepro_pro380
+  protocol: tcp/ip
+  metrics:
+  - name: inepro_pro380_serial_number
+    address: 3016384
+    help: Serial number
+    dataType: uint32
+    metricType: gauge
+
+  - name: inepro_pro380_meter_code
+    address: 3016386
+    help: Meter code
+    dataType: uint32
+    metricType: gauge
+
+  - name: inepro_pro380_station_id
+    address: 3016387
+    help: Modbus station ID
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_baud_rate
+    address: 3016388
+    help: Baud rate
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_protocol_version
+    address: 3016389
+    help: Protocol version
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_software_version
+    address: 3016391
+    help: Software version
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_hardware_version
+    address: 3016393
+    help: Hardware version
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_meter_ampere
+    address: 3016395
+    help: Meter ampere
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_s0_output_impulses_per_second
+    address: 3016397
+    help: S0 output rate (imp/s)
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_combined_code
+    address: 3016399
+    help: Combination code
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_lcd_cycle_time
+    address: 3016400
+    help: LCD cycle time
+    dataType: uint32
+    metricType: gauge
+
+  - name: inepro_pro380_parity_setting
+    address: 3016401
+    help: Parity setting
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_error_code
+    address: 3016405
+    help: Error code
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_power_down_count
+    address: 3016406
+    help: Power down count
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_quadrant
+    address: 3016407
+    help: Cross-phase quadrant
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_phase_quadrant
+    address: 3016408
+    help: Phase quadrant
+    dataType: int16
+    metricType: gauge
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_quadrant
+    address: 3016409
+    help: Phase quadrant
+    dataType: int16
+    metricType: gauge
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_quadrant
+    address: 3016410
+    help: Phase quadrant
+    dataType: int16
+    metricType: gauge
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_checksum
+    address: 3016411
+    help: Checksum
+    dataType: uint32
+    metricType: gauge
+
+  - name: inepro_pro380_active_status_word
+    address: 3016413
+    help: Active status word
+    dataType: uint32
+    metricType: gauge
+
+  - name: inepro_pro380_voltage
+    address: 3020480
+    help: Voltage
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_phase_voltage
+    address: 3020482
+    help: Phase voltage
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_voltage
+    address: 3020484
+    help: Phase voltage
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_voltage
+    address: 3020486
+    help: Phase voltage
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_grid_frequency_hertz
+    address: 3020488
+    help: Grid frequency (Hz)
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_current_ampere
+    address: 3020490
+    help: Current
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_phase_current_ampere
+    address: 3020492
+    help: Phase current (A)
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_current_ampere
+    address: 3020494
+    help: Phase current (A)
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_current_ampere
+    address: 3020496
+    help: Phase current (A)
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_active_power_watt
+    address: 3020498
+    help: Total active power (watt)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_phase_active_power_watt
+    address: 3020500
+    help: Per-phase active power (watt)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_active_power_watt
+    address: 3020502
+    help: Per-phase active power (watt)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_active_power_watt
+    address: 3020504
+    help: Per-phase active power (watt)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_reactive_power_var
+    address: 3020506
+    help: Total reactive power (var)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_phase_reactive_power_var
+    address: 3020508
+    help: Per-phase reactive power (var)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_reactive_power_var
+    address: 3020510
+    help: Per-phase reactive power (var)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_reactive_power_var
+    address: 3020512
+    help: Per-phase reactive power (var)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_apparent_power_va
+    address: 3020514
+    help: Total apparent power (VA)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_phase_apparent_power_va
+    address: 3020516
+    help: Per-phase apparent power (VA)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_apparent_power_va
+    address: 3020518
+    help: Per-phase apparent power (VA)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_apparent_power_va
+    address: 3020520
+    help: Per-phase apparent power (VA)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_power_factor
+    address: 3020522
+    help: Power factor
+    dataType: float32
+    metricType: gauge
+
+  - name: inepro_pro380_phase_power_factor
+    address: 3020524
+    help: Per-phase power factor
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_power_factor
+    address: 3020526
+    help: Per-phase power factor
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_power_factor
+    address: 3020528
+    help: Per-phase power factor
+    dataType: float32
+    metricType: gauge
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_active_energy_wh
+    address: 3024576
+    help: Total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+
+  - name: inepro_pro380_tariff_total_active_energy_wh
+    address: 3024578
+    help: Per-tariff total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_total_active_energy_wh
+    address: 3024580
+    help: Per-tariff total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_total_active_energy_wh
+    address: 3024582
+    help: Per-phase total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_total_active_energy_wh
+    address: 3024584
+    help: Per-phase total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_total_active_energy_wh
+    address: 3024586
+    help: Per-phase total active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_forward_active_energy_wh
+    address: 3024588
+    help: Forward active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+
+  - name: inepro_pro380_tariff_forward_active_energy_wh
+    address: 3024590
+    help: Per-tariff forward active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_forward_active_energy_wh
+    address: 3024592
+    help: Per-tariff forward active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_forward_active_energy_wh
+    address: 3024594
+    help: Per-phase forward active Energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_forward_active_energy_wh
+    address: 3024596
+    help: Per-phase forward active Energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_forward_active_energy_wh
+    address: 3024598
+    help: Per-phase forward active Energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_reverse_active_energy_wh
+    address: 3024600
+    help: Reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+
+  - name: inepro_pro380_tariff_reverse_active_energy_wh
+    address: 3024602
+    help: Per-tariff reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_reverse_active_energy_wh
+    address: 3024604
+    help: Per-tariff reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_reverse_active_energy_wh
+    address: 3024606
+    help: Per-phase reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_reverse_active_energy_wh
+    address: 3024608
+    help: Per-phase reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_reverse_active_energy_wh
+    address: 3024610
+    help: Per-phase reverse active energy (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_total_reactive_energy_varh
+    address: 3024612
+    help: Total Reactive Energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_tariff_total_reactive_energy_varh
+    address: 3024614
+    help: Per-tariff total reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_total_reactive_energy_varh
+    address: 3024616
+    help: Per-tariff total reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_total_reactive_energy_varh
+    address: 3024618
+    help: Per-phase total reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_total_reactive_energy_varh
+    address: 3024620
+    help: Per-phase total reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_total_reactive_energy_varh
+    address: 3024622
+    help: Per-phase total reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_forward_reactive_energy_varh
+    address: 3024624
+    help: Forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_tariff_forward_reactive_energy_varh
+    address: 3024626
+    help: Per-tariff forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_forward_reactive_energy_varh
+    address: 3024628
+    help: Per-tariff forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_forward_reactive_energy_varh
+    address: 3024630
+    help: Per-phase forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_forward_reactive_energy_varh
+    address: 3024632
+    help: Per-phase forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_forward_reactive_energy_varh
+    address: 3024634
+    help: Per-phase forward reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_reverse_reactive_energy_varh
+    address: 3024636
+    help: Reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+
+  - name: inepro_pro380_tariff_reverse_reactive_energy_varh
+    address: 3024638
+    help: Per-tariff reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '1'
+
+  - name: inepro_pro380_tariff_reverse_reactive_energy_varh
+    address: 3024640
+    help: Per-tariff reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      tariff: '2'
+
+  - name: inepro_pro380_phase_reverse_reactive_energy_varh
+    address: 3024642
+    help: Per-phase reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '1'
+
+  - name: inepro_pro380_phase_reverse_reactive_energy_varh
+    address: 3024644
+    help: Per-phase reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '2'
+
+  - name: inepro_pro380_phase_reverse_reactive_energy_varh
+    address: 3024646
+    help: Per-phase reverse reactive energy (varh)
+    dataType: float32
+    metricType: gauge
+    factor: 1000
+    labels:
+      phase: '3'
+
+  - name: inepro_pro380_tariff
+    address: 3024648
+    help: Tariff
+    dataType: int16
+    metricType: gauge
+
+  - name: inepro_pro380_resettable_day_counter_wh
+    address: 3024649
+    help: Resettable day counter (Wh)
+    dataType: float32
+    metricType: counter
+    factor: 1000
+
+# vim: set sw=2 sts=2 et :
