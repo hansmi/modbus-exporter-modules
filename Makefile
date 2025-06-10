@@ -2,6 +2,7 @@ include build/defaults.mk
 include build/dirs.mk
 include build/download.mk
 include build/go.mk
+include build/static.mk
 include build/ennexos.mk
 include build/dist.mk
 include build/container.mk
