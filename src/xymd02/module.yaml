@@ -1,0 +1,34 @@
+---
+# Parameters for XY-MD02 devices. They contain a temperature and humidity
+# sensor.
+modules:
+- name: xymd02
+  protocol: tcp/ip
+  metrics:
+  - name: xymd02_temperature_celsius
+    address: 401
+    help: Measured temperature (degrees celsius).
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+
+  - name: xymd02_humidity_percent
+    address: 402
+    help: Measured relative humidity (percent).
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+
+  - name: xymd02_temperature_correction
+    address: 30259
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+
+  - name: xymd02_humidity_correction
+    address: 30260
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+
+# vim: set sw=2 sts=2 et :
