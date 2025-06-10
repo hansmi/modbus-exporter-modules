@@ -1,0 +1,248 @@
+---
+# Parameters for DAfi Smartfox Pro and Pro 2. Derived from the vendor
+# documentation for firmware version 00.01.03.10 at
+# <https://smartfox.at/wp-content/uploads/2022/12/Modbus-Register-SMARTFOX-Pro-SMARTFOX-Pro-2-v22e-00.01.03.10.xlsx>.
+modules:
+- name: smartfox
+  protocol: tcp/ip
+  metrics:
+  - &smartfox_software_version
+    name: smartfox_software_version
+    address: 340009
+    help: Software version
+    dataType: uint32
+    metricType: gauge
+    labels:
+      component: main
+
+  - <<: *smartfox_software_version
+    address: 340011
+    labels:
+      component: wlan
+
+  - name: smartfox_energy_from_grid_wh_total
+    address: 340999
+    help: Energy from grid (Wh)
+    dataType: uint64
+    metricType: counter
+
+  - name: smartfox_energy_to_grid_wh_total
+    address: 341003
+    help: Day to grid (Wh)
+    dataType: uint64
+    metricType: counter
+
+  - name: smartfox_energy_used_wh_total
+    address: 341007
+    help: Used energy as controlled and computed for analog output (Wh)
+    dataType: uint64
+    metricType: counter
+
+  - name: smartfox_day_energy_from_grid_wh_total
+    address: 341011
+    help: Energy from grid since midnight (Wh)
+    dataType: uint32
+    metricType: counter
+
+  - name: smartfox_day_energy_to_grid_wh_total
+    address: 341013
+    help: Energy to grid since midnight (Wh)
+    dataType: uint32
+    metricType: counter
+
+  - name: smartfox_day_energy_used_wh_total
+    address: 341015
+    help: Energy used as controlled and computed for analog output since midnight (Wh)
+    dataType: uint32
+    metricType: counter
+
+  - &smartfox_power_watt
+    name: smartfox_power_watt
+    address: 341019
+    help: Power into grid (W)
+    dataType: int32
+    metricType: gauge
+    labels:
+      phase: '1'
+
+  - <<: *smartfox_power_watt
+    address: 341021
+    labels:
+      phase: '2'
+
+  - <<: *smartfox_power_watt
+    address: 341023
+    labels:
+      phase: '3'
+
+  - &smartfox_voltage
+    name: smartfox_voltage
+    address: 341025
+    help: Voltage (V)
+    dataType: uint16
+    metricType: gauge
+    factor: 0.1
+    labels:
+      phase: '1'
+
+  - <<: *smartfox_voltage
+    address: 341026
+    labels:
+      phase: '2'
+
+  - <<: *smartfox_voltage
+    address: 341027
+    labels:
+      phase: '3'
+
+  - &smartfox_current
+    name: smartfox_current_ampere
+    address: 341028
+    help: Current (A)
+    dataType: uint32
+    metricType: gauge
+    factor: 0.001
+    labels:
+      phase: '1'
+
+  - <<: *smartfox_current
+    address: 341030
+    labels:
+      phase: '2'
+
+  - <<: *smartfox_current
+    address: 341032
+    labels:
+      phase: '3'
+
+  - name: smartfox_frequency_hertz
+    address: 341037
+    help: Frequency (Hz)
+    dataType: uint16
+    metricType: gauge
+    factor: 0.01
+
+  - name: smartfox_pt1000_temperature_celsius
+    address: 341038
+    help: PT1000 temperature (°C)
+    dataType: int16
+    metricType: gauge
+    factor: 0.1
+
+  - name: smartfox_control_power_voltage
+    address: 341043
+    help: Nominal 24V control power (V)
+    dataType: uint16
+    metricType: gauge
+    factor: 0.01
+
+  - name: smartfox_analog_output_percentage
+    address: 341046
+    help: Analog output ratio (%)
+    dataType: uint16
+    metricType: gauge
+
+  - name: smartfox_sd_card_available_bytes
+    address: 341047
+    help: Available storage space on SD card
+    dataType: uint32
+    metricType: gauge
+    factor: 1048576
+
+  - name: smartfox_inverter_power_watt
+    address: 341399
+    help: Power (W)
+    dataType: uint32
+    metricType: gauge
+    labels:
+      inverter: '1'
+
+  - name: smartfox_inverter_energy_wh_total
+    address: 341401
+    help: Energy (Wh)
+    dataType: uint64
+    metricType: counter
+    labels:
+      inverter: '1'
+
+  - name: smartfox_analog_output_threshold_watt
+    address: 342199
+    help: Analog output threshold (W)
+    dataType: int32
+    metricType: gauge
+
+  - name: smartfox_analog_output_power_watt
+    address: 342201
+    help: Configured power usage (Watt)
+    dataType: uint32
+    metricType: gauge
+
+  - name: smartfox_analog_output_state
+    address: 342206
+    help: Analog output state (0=off, 1=manual, 2=auto)
+    dataType: uint16
+    metricType: gauge
+
+  - name: smartfox_analog_output_manual_percentage
+    address: 342207
+    help: Manual analog output percentage (%)
+    dataType: uint16
+    metricType: gauge
+
+  - &smartfox_relay_state
+    name: smartfox_relay_state
+    address: 342249
+    help: Relay state (0=off, 1=auto, 2=manual)
+    dataType: uint16
+    metricType: gauge
+    labels:
+      relay: '1'
+
+  - <<: *smartfox_relay_state
+    address: 342279
+    labels:
+      relay: '2'
+
+  - &smartfox_relay_enabled
+    name: smartfox_relay_enabled
+    address: 342369
+    help: Relay enabled (0=false, 1=true)
+    dataType: uint16
+    metricType: gauge
+    labels:
+      relay: '1'
+
+  - <<: *smartfox_relay_enabled
+    address: 342370
+    labels:
+      relay: '2'
+
+  - &smartfox_relay_power_watt
+    name: smartfox_relay_power_watt
+    address: 342252
+    help: Configured power usage (W)
+    dataType: uint32
+    metricType: gauge
+    labels:
+      relay: '1'
+
+  - <<: *smartfox_relay_power_watt
+    address: 342282
+    labels:
+      relay: '2'
+
+  - &smartfox_relay_off_threshold_watt
+    name: smartfox_relay_off_threshold_watt
+    address: 342257
+    help: Relay off threshold (W)
+    dataType: int32
+    metricType: gauge
+    labels:
+      relay: '1'
+
+  - <<: *smartfox_relay_off_threshold_watt
+    address: 342287
+    labels:
+      relay: '2'
+
+# vim: set sw=2 sts=2 et :
