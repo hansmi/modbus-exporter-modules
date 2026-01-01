@@ -71,7 +71,7 @@ jobs:
             dist container
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: modbus-exporter-modules-${{ github.sha }}-${{ hashFiles('dist/**') }}
           path: dist/**
