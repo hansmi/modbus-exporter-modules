@@ -83,7 +83,7 @@ jobs:
 
       - name: GitHub Container Registry login
         if: steps.vars.outputs.release_enabled
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
